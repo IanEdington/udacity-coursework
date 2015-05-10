@@ -50,3 +50,36 @@ function inName(name) {
 }
 
 $('#main').append(internationalizeButton);
+
+
+function getRelationship(x, y) {
+    if (typeof x === 'number' && ! isNaN(x)) {
+        if (typeof y === 'number' && ! isNaN(y)) {
+            if (x === y) {
+                return '=';
+            } else if (x < y) {
+                return '<';
+            } else if (x > y) {
+                return '>';
+            }
+        } else  {
+            return 'Can\'t compare relationships because ' + y + ' is not a number';
+        }
+    } else {
+        if (typeof y === 'number' && ! isNaN(y)) {
+            return "Can\'t compare relationships because " + x + " is not a number";
+        } else {
+            return 'Can\'t compare relationships because ' + x + ' and ' + y + ' are not numbers';
+        }
+    }
+}
+
+// Try logging these functions to test your code!
+console.log(getRelationship(1,4));
+console.log(getRelationship(1,1));
+console.log(getRelationship("that",2));
+console.log(getRelationship("this"," something else"));
+console.log(getRelationship(3));
+console.log(getRelationship("hi"));
+console.log(getRelationship(NaN));
+console.log(getRelationship(NaN, undefined));
