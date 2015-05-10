@@ -33,11 +33,20 @@ $('#main').append(bio.age);
 // }
 
 
-$(document).click(function(loc) {
-	var x = loc.pageX;
-	var y = loc.pageY;
+// $(document).click(function(loc) {
+// 	var x = loc.pageX;
+// 	var y = loc.pageY;
+//
+// 	logClicks(x,y);
+// });
 
-	logClicks(x,y);
-});
+function inName(name) {
+	name = name.split(' ');
+	console.log(name);
+	name[1] = name[1].toUpperCase();
+	name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
+
+	return name[0] + ' ' + name[1];
+}
 
 $('#main').append(internationalizeButton);
