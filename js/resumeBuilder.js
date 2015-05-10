@@ -21,7 +21,23 @@ $('#header').append(formatedName);
 $('#header').append(formatedRole);
 $('#main').append(bio.age);
 
-if(Array.isArray(skills) && skills.length > 0) {
-	$('#header').append(HTMLskillsStart)
-	$('#main').append(skills);
-}
+// if(Array.isArray(skills) && skills.length > 0) {
+// 	$('#header').append(HTMLskillsStart);
+//
+// 	var formatedSkills ='';
+//
+//   for (index in skills) {
+// 	  formatedSkills = formatedSkills.concat(HTMLskills.replace('%data%', bio.skills[index]));
+// 	}
+// 	$('#main').append(formatedSkills);
+// }
+
+
+$(document).click(function(loc) {
+	var x = loc.pageX;
+	var y = loc.pageY;
+
+	logClicks(x,y);
+});
+
+$('#main').append(internationalizeButton);
