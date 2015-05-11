@@ -3,10 +3,8 @@ var Car = function(loc){
   obj.loc = loc;
   return obj;
 };
-Car.methods = {
-  move : function(){
+Car.prototype.move = function(){
     this.loc += 1;
-  };
-  on : function(){ /* some function */ }
-  off : function(){ /* some function */ }
-}
+};
+Car.prototype.on = function(){ /* some function */ };
+Car.prototype.off = function(){ /* some function */ };
