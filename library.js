@@ -1,9 +1,19 @@
-var Car = function(loc){
-  this.loc = loc;
+var Car = function(){
+  var obj = {loc: loc};
+  obj.move = function(){
+    obj.loc+=1;
+  };
+  return obj;
 };
 
-Car.prototype.move = function(){
-    this.loc += 1;
-};
-Car.prototype.on = function(){ /* some function */ };
-Car.prototype.off = function(){ /* some function */ };
+var Van = function(loc){
+  var obj = Car(loc);
+  obj.grab = function{ /*...*/ };
+  return obj;
+}
+
+var Cop = function(loc){
+  var obj = Car(loc);
+  obj.call = function{ /*...*/ };
+  return obj;
+}
