@@ -1,9 +1,9 @@
 var Car = function(loc){
   var obj = {loc: loc};
-  extend(obj, methods);
+  extend(obj, Car.methods);
   return obj;
 };
-var methods = {
+Car.methods = {
   move : function(){
     this.loc += 1;
   };
