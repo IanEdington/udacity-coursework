@@ -1,4 +1,4 @@
-var Car = function(){
+var Car = function(loc){
   var obj = {loc: loc};
   obj.move = function(){
     obj.loc+=1;
