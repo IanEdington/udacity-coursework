@@ -1,6 +1,6 @@
 var Car = function(loc){
-  var obj = {loc: loc};
-  extend(obj, Car.methods);
+  var obj = Object.create(Car.methods);
+  obj.loc = loc;
   return obj;
 };
 Car.methods = {
