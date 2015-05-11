@@ -1,2 +1,4 @@
-var amy = {loc:1};
-amy.loc += 1;
+var amy = carlike({}, 1);
+amy.move();
+var bob = carlike({}, 9);
+bob.move();
