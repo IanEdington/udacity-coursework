@@ -1,8 +1,7 @@
 var Car = function(loc){
-  var obj = Object.create(Car.prototype);
-  obj.loc = loc;
-  return obj;
+  this.loc = loc;
 };
+
 Car.prototype.move = function(){
     this.loc += 1;
 };

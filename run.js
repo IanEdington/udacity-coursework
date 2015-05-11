@@ -1,4 +1,4 @@
-var amy = car({}, 1);
+var amy = new Car(1);
 amy.move();
-var bob = car({}, 9);
+var bob = new Car(9);
 bob.move();
