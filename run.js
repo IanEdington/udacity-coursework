@@ -1,12 +1,12 @@
-var zed = Car(3);
+var zed = new Car(3);
 zed.move();
 
-var amy = Van(1);
+var amy = new Van(1);
 amy.move();
-var bob = Van(9);
+var bob = new Van(9);
 bob.move();
 bob.grab();
 
-var cal = Cop(2);
+var cal = new Cop(2, 3);
 cal.move();
 cal.call();

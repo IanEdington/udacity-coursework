@@ -1,19 +1,30 @@
 var Car = function(loc){
-  var obj = {loc: loc};
-  obj.move = function(){
-    obj.loc+=1;
-  };
-  return obj;
+  this.loc = loc;
+};
+Car.prototype.move = function(){
+  this.loc+=1;
 };
 
+//there are always two parts to a class
+//both need to be inherited for the
+//sub-classing to work
 var Van = function(loc){
-  var obj = Car(loc);
-  obj.grab = function{ /*...*/ };
-  return obj;
-}
+  //1.create the unique elements
+  //inherited from the Car constuctor
+  Car.call(this, loc);
+};
+//2.make the van prototype inherite from
+//the car prototype.
+Van.prototype = Object.create(Car.prototype);
+Van.prototype.constructor = Van;
 
-var Cop = function(loc){
-  var obj = Car(loc);
-  obj.call = function{ /*...*/ };
-  return obj;
-}
+Van.prototype.grab = function{ /*...*/ };
+
+var Cop = function(loc, radio){
+  Car.call(this, loc);
+  this.radio = radio;
+};
+Cop.prototype = Object.create(Car.prototype);
+Cop.prototype.constructor = Cop;
+
+Cop.prototype.call = function{ /*...*/ };
