@@ -1,12 +1,10 @@
-var HTMLcat = '<div id="Cat-%catname%" class="col-md-6"> <div id="%catname%-header" class="center-content clearfix"> </div> <div id="%catname%-cat-pic"> <img src="%url%" class="img-responsive"></div><div id="%catname%-Counter" class="counter"> 0 </div> </div>';
+var HTMLcat = '<div id="Cat-%catname%" class="col-xs-6"> <div id="%catname%-header" class="center-content clearfix"> %catname% </div> <div id="%catname%-cat-pic"> <img src="%url%" class="property-thumbnail img-responsive"></div><div id="%catname%-Counter" class="counter"> 0 </div> </div>';
 
 var Cat = function(catname, url){
-	this.catname = catname;
-  this.catPic = this.catname+"-cat-pic";
-  this.countName = this.catname+"-Counter";
-	this.url = url;
+  this.catPic = catname+"-cat-pic";
+  this.countName = catname+"-Counter";
   this.counter = 0;
-  this.HTML = HTMLcat.replace(/%catname%/g, catname).replace(/%url%/g, url);
+  $('#cat-row1').append(HTMLcat.replace(/%catname%/g, catname).replace(/%url%/g, url));
 };
 Cat.prototype.clicker = function(){
   var counter = this.counter;
@@ -16,5 +14,4 @@ Cat.prototype.clicker = function(){
     counter+=1;
 		$('#'+countName).html(counter);
 	});
-  console.log('clicker was called');
 };
