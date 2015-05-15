@@ -1,5 +1,11 @@
-var ruby = new Cat('ruby', 'cats/ruby.JPG');
-ruby.clicker();
+catNames = [
+	'ruby',
+	'jake',
+	'rod',
+	'simon',
+	'coutny'
+];
 
-var jake = new Cat('jake', 'cats/jake.JPG');
-jake.clicker();
+for (var i in catNames){
+	var cat = new Cat(catNames[i], 'cats/'+catNames[i]+'.JPG');
+}
