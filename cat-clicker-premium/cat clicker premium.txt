@@ -1,3 +1,11 @@
+reflections:
+How hard was the project?
+	3/5
+How do you feel about your code?
+	Good! I knew what I wanted it to do and I figured it out. If you wanted 100 cats, it would take a while to find all the pictures but that would be the hardest part!
+How many times have you clicked the cats? probably 200 times in total. Got to make sure they were working properly :D
+
+
 Project Requirements for Cat Clicker Premium
 
 Visuals
