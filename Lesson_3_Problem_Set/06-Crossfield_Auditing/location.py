@@ -24,10 +24,9 @@ CITIES = 'cities.csv'
 
 
 def check_loc(point, lat, longi):
-    # YOUR CODE HERE
-    
-    pass
-
+    if point == (lat +' '+ longi):
+        return True
+    else: return False
 
 def process_file(filename):
     data = []
@@ -41,7 +40,7 @@ def process_file(filename):
             # calling your function to check the location
             result = check_loc(line["point"], line["wgs84_pos#lat"], line["wgs84_pos#long"])
             if not result:
-                print "{}: {} != {} {}".format(line["name"], line["point"], line["wgs84_pos#lat"], line["wgs84_pos#long"])
+                print ("{}: {} != {} {}".format(line["name"], line["point"], line["wgs84_pos#lat"], line["wgs84_pos#long"]))
             data.append(line)
 
     return data
