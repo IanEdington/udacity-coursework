@@ -21,15 +21,24 @@ CITIES = 'cities.csv'
 
 
 def fix_area(area):
-
-    # YOUR CODE HERE
-
-    return area
-
-
+    try:
+        # assume it's a normal float string '52330000.0'
+        return float(area)
+    except:
+        # split the 'list' format '{1.01787e+08|1.019e+08}'
+        # take the first number from the list
+        try:
+            nums = area.split('|')
+            nums = [nums[0][1:], nums[1][:-1]]
+            if len(nums[0]) > len(nums[1]):
+                num = nums[0]
+            else:
+                num = nums[1]
+            return float(num)
+        except:
+            pass
 
 def process_file(filename):
-    # CHANGES TO THIS FUNCTION WILL BE IGNORED WHEN YOU SUBMIT THE EXERCISE
     data = []
 
     with open(filename, "r") as f:
@@ -37,7 +46,7 @@ def process_file(filename):
 
         #skipping the extra matadata
         for i in range(3):
-            l = reader.next()
+            next(reader)
 
         # processing file
         for line in reader:
@@ -52,12 +61,14 @@ def process_file(filename):
 def test():
     data = process_file(CITIES)
 
-    print "Printing three example results:"
-    for n in range(5,8):
-        pprint.pprint(data[n]["areaLand"])
+    # print ("Printing three example results:")
+    for n in data:
+        pprint.pprint(n["areaLand"])
 
     assert data[8]["areaLand"] == 55166700.0
     assert data[3]["areaLand"] == None
+    assert data[20]["areaLand"] == 14581600.0
+    assert data[33]["areaLand"] == 20564500.0
 
 
 if __name__ == "__main__":

@@ -35,9 +35,9 @@ def audit_file(filename, fields):
     header = reader.fieldnames
 
     # skip firt 3 lines of header info
-    reader.next()
-    reader.next()
-    reader.next()
+    next(reader)
+    next(reader)
+    next(reader)
 
     # loop through each row checking each field we care about
     for row in reader:
@@ -46,7 +46,7 @@ def audit_file(filename, fields):
             if (cell == "NULL") | (cell == ""):
                 celltype = type(None)
             elif cell[0:1] == "{":
-                type([])
+                celltype = type([])
             else:
                 try:
                     cell = int(cell)
@@ -70,7 +70,7 @@ def audit_file(filename, fields):
 def test():
     fieldtypes = audit_file(CITIES, FIELDS)
 
-    pprint.pprint(fieldtypes)
+    pprint(fieldtypes)
 
     assert fieldtypes["areaLand"] == set([type(1.1), type([]), type(None)])
     assert fieldtypes['areaMetro'] == set([type(1.1), type(None)])
