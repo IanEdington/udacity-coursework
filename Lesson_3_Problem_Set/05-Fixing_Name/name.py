@@ -4,7 +4,7 @@
 In this problem set you work with cities infobox data, audit it, come up with a cleaning idea and then clean it up.
 
 In the previous quiz you recognized that the "name" value can be an array (or list in Python terms).
-It would make it easier to process and query the data later, if all values for the name 
+It would make it easier to process and query the data later, if all values for the name
 would be in a Python list, instead of being just a string separated with special characters, like now.
 
 Finish the function fix_name(). It will recieve a string as an input, and it has to return a list
@@ -20,10 +20,12 @@ CITIES = 'cities.csv'
 
 
 def fix_name(name):
-
-    # YOUR CODE HERE
-
-    return name
+    if name[0] == '{': # '{Negtemiut|Nightmute}'
+        return name[1:-1].split('|')
+    elif name == 'NULL':
+        return []
+    else:
+        return [name]
 
 
 def process_file(filename):
@@ -32,7 +34,7 @@ def process_file(filename):
         reader = csv.DictReader(f)
         #skipping the extra matadata
         for i in range(3):
-            l = reader.next()
+            next(reader)
         # processing file
         for line in reader:
             # calling your function to fix the area value
@@ -45,7 +47,7 @@ def process_file(filename):
 def test():
     data = process_file(CITIES)
 
-    print "Printing 20 results:"
+    print ("Printing 20 results:")
     for n in range(20):
         pprint.pprint(data[n]["name"])
 
