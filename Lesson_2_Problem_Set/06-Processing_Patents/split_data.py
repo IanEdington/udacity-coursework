@@ -21,8 +21,18 @@ def split_file(filename):
     # The new files should be saved with filename in the following format:
     # "{}-{}".format(filename, n) where n is a counter, starting from 0.
 
-    pass
-
+    with open(filename,'r') as f:
+        n = 0
+        new_f = open("{}-{}".format(filename, n),'w')
+        new_f.write(f.readline())
+        for line in f:
+            if line == '<?xml version="1.0" encoding="UTF-8"?>\n':
+                new_f.close()
+                n += 1
+                new_f = open("{}-{}".format(filename, n),'w')
+                print ('<?xml version="1.0" encoding="UTF-8"?>')
+            new_f.write(line)
+        new_f.close()
 
 def test():
     split_file(PATENTS)
@@ -31,10 +41,10 @@ def test():
             fname = "{}-{}".format(PATENTS, n)
             f = open(fname, "r")
             if not f.readline().startswith("<?xml"):
-                print "You have not split the file {} in the correct boundary!".format(fname)
+                print ("You have not split the file {} in the correct boundary!".format(fname))
             f.close()
         except:
-            print "Could not find file {}. Check if the filename is correct!".format(fname)
+            print ("Could not find file {}. Check if the filename is correct!".format(fname))
 
 
 test()
