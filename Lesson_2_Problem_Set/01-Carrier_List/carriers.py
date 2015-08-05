@@ -1,3 +1,12 @@
+'''
+1 - testing <tag list>.values
+2 - roller coaster about miss understanding attributes, tags, learned a lot
+
+ref:
+    http://www.crummy.com/software/BeautifulSoup/bs4/doc/
+    http://www.crummy.com/software/BeautifulSoup/bs4/doc/#attributes
+'''
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Please note that the function 'make_request' is provided for your reference only.
@@ -14,13 +23,13 @@ html_page = "options.html"
 
 
 def extract_carriers(page):
-    data = []
-
-    with open(page, "r") as html:
+    with open(html_page, "r") as html:
         # do something here to find the necessary values
         soup = BeautifulSoup(html)
-
-    return data
+        select = soup.find(id='CarrierList')
+        carrier_options = select.find_all('option')
+        carriers = [carrier['value'] for carrier in carrier_options][3:]
+    return carriers
 
 
 def make_request(data):
