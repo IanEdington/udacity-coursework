@@ -23,8 +23,7 @@ html_page = "options.html"
 
 
 def extract_carriers(page):
-    with open(html_page, "r") as html:
-        # do something here to find the necessary values
+    with open(page, "r") as html:
         soup = BeautifulSoup(html)
         select = soup.find(id='CarrierList')
         carrier_options = select.find_all('option')
