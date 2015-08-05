@@ -17,19 +17,52 @@ All the data initially is a string, so you have to do some checks on the values 
 import codecs
 import csv
 import json
-import pprint
+from pprint import pprint
+from collections import defaultdict
 
 CITIES = 'cities.csv'
 
-FIELDS = ["name", "timeZone_label", "utcOffset", "homepage", "governmentType_label", "isPartOf_label", "areaCode", "populationTotal", 
-          "elevation", "maximumElevation", "minimumElevation", "populationDensity", "wgs84_pos#lat", "wgs84_pos#long", 
+FIELDS = ["name", "timeZone_label", "utcOffset", "homepage", "governmentType_label", "isPartOf_label", "areaCode", "populationTotal",
+          "elevation", "maximumElevation", "minimumElevation", "populationDensity", "wgs84_pos#lat", "wgs84_pos#long",
           "areaLand", "areaMetro", "areaUrban"]
 
 def audit_file(filename, fields):
-    fieldtypes = {}
+    fieldtypes = defaultdict(set)
+    fieldvalues = defaultdict(set)
 
-    # YOUR CODE HERE
+    f = open(filename, 'r')
+    reader = csv.DictReader(f)
+    header = reader.fieldnames
 
+    # skip firt 3 lines of header info
+    reader.next()
+    reader.next()
+    reader.next()
+
+    # loop through each row checking each field we care about
+    for row in reader:
+        for field in fields:
+            cell = row[field]
+            if (cell == "NULL") | (cell == ""):
+                celltype = type(None)
+            elif cell[0:1] == "{":
+                type([])
+            else:
+                try:
+                    cell = int(cell)
+                    celltype = type(1)
+                except:
+                    try:
+                        cell = float(cell)
+                        celltype = type(1.1)
+                    except:
+                        celltype = type('string')
+
+            fieldtypes[field] |= {celltype}
+            fieldvalues[field] |= {cell}
+
+    pprint(fieldtypes)
+    pprint(fieldvalues)
 
     return fieldtypes
 
@@ -41,6 +74,6 @@ def test():
 
     assert fieldtypes["areaLand"] == set([type(1.1), type([]), type(None)])
     assert fieldtypes['areaMetro'] == set([type(1.1), type(None)])
-    
+
 if __name__ == "__main__":
     test()
