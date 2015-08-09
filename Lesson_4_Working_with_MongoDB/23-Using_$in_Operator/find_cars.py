@@ -17,9 +17,9 @@ def get_db():
 
 
 def in_query():
-    # Write the query
-    query = {}
-    
+    query = {'manufacturer': 'Ford Motor Company',
+             'assembly': {'$in': ['Germany', 'United Kingdom', 'Japan']}
+             }
     return query
 
 
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     query = in_query()
     autos = db.autos.find(query, {"name":1, "manufacturer":1, "assembly": 1, "_id":0})
 
-    print "Found autos:", autos.count()
+    print ("Found autos:", autos.count())
     import pprint
     for a in autos:
         pprint.pprint(a)
