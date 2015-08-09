@@ -12,8 +12,8 @@ the following link:
 https://www.udacity.com/wiki/ud032
 
 Importing data to MongoDB
-    in the terminal from the Data_Sets folder import autos.csv using the following command
-    mongoimport --db examples --collection autos --type csv --file autos.csv --headerline
+    in the Data_Sets folder
+    run the import_auto_csv.py script
 """
 
 import pymongo
@@ -38,6 +38,8 @@ if __name__ == "__main__":
     db = get_db('examples')
     query = porsche_query()
     p = find_porsche(db, query)
+
+    print(db.autos.find_one())
 
     for a in db.autos.find({}, {'manufacturer': 1}).limit(10):
         pprint(a)
