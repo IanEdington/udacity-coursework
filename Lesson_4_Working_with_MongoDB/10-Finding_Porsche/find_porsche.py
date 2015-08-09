@@ -10,29 +10,34 @@ you have to install MongoDB and download and insert the dataset.
 For instructions related to MongoDB setup and datasets please see Course Materials at
 the following link:
 https://www.udacity.com/wiki/ud032
+
+Importing data to MongoDB
+    in the terminal from the Data_Sets folder import autos.csv using the following command
+    mongoimport --db examples --collection autos --type csv --file autos.csv --headerline
 """
 
+import pymongo
+from pymongo import MongoClient
+import csv
+from pprint import pprint
 
 def get_db(db_name):
-    from pymongo import MongoClient
     client = MongoClient('localhost:27017')
     db = client[db_name]
     return db
 
-
 def porsche_query():
     # Please fill in the query to find all autos manuafactured by Porsche
-    query = {}
+    query = {"manufacturer" : "Porsche"}
     return query
-
 
 def find_porsche(db, query):
     return db.autos.find(query)
 
-
 if __name__ == "__main__":
-
     db = get_db('examples')
     query = porsche_query()
     p = find_porsche(db, query)
-    import pprint
+
+    for a in db.autos.find({}, {'manufacturer': 1}).limit(10):
+        pprint(a)
