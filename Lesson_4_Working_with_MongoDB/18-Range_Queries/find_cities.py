@@ -7,9 +7,12 @@ Your code will be run against a MongoDB instance that we have provided.
 If you want to run this code locally on your machine,
 you have to install MongoDB, download and insert the dataset.
 For instructions related to MongoDB setup and datasets please see Course Materials.
+
+from the
+mongoimport -d examples -c cities --type csv --file cities.csv --headerline
 """
 from datetime import datetime
-    
+
 def get_db():
     from pymongo import MongoClient
     client = MongoClient('localhost:27017')
@@ -19,7 +22,10 @@ def get_db():
 
 def range_query():
     # You can use datetime(year, month, day) to specify date in the query
-    query = {}
+    query = {'foundingDate': {'$gte':datetime(2001, 1, 1),
+                              '$lt':datetime(2100, 1, 1)
+                              }
+             }
     return query
 
 
@@ -29,6 +35,6 @@ if __name__ == "__main__":
     query = range_query()
     cities = db.cities.find(query)
 
-    print "Found cities:", cities.count()
+    print ("Found cities: ", cities.count())
     import pprint
     pprint.pprint(cities[0])
