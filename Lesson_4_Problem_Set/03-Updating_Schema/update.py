@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-In this problem set you work with another type of infobox data, audit it, clean it, 
+In this problem set you work with another type of infobox data, audit it, clean it,
 come up with a data model, insert it into a MongoDB and then run some queries against your database.
 The set contains data about Arachnid class.
 
@@ -46,23 +46,52 @@ DATAFILE = 'arachnid.csv'
 FIELDS ={'rdf-schema#label': 'label',
          'binomialAuthority_label': 'binomialAuthority'}
 
+def parse_array(v):
+    if (v[0] == "{") and (v[-1] == "}"):
+        v = v.lstrip("{")
+        v = v.rstrip("}")
+        v_array = v.split("|")
+        v_array = [i.strip() for i in v_array]
+        return v_array
+    return [v]
 
 def add_field(filename, fields):
+    '''
+    The following things should be done in the function add_field:
+    - process the csv file and extract 2 fields - 'rdf-schema#label' and 'binomialAuthority_label'
+    - clean up the 'rdf-schema#label' same way as in the first exercise - removing redundant "(spider)" suffixes
+    - return a dictionary, with 'label' being the key, and 'binomialAuthority_label' the value
+    - if 'binomialAuthority_label' is "NULL", skip the item
+    '''
 
     process_fields = fields.keys()
     data = {}
     with open(filename, "r") as f:
         reader = csv.DictReader(f)
         for i in range(3):
-            l = reader.next()
-        # YOUR CODE HERE
+            l = next(reader)
+
+        for row in reader:
+            if (row['binomialAuthority_label'] != 'NULL') & (row['rdf-schema#label'] != 'NULL'):
+                label = row['rdf-schema#label'].split('(')[0].strip()
+                author = parse_array(row['binomialAuthority_label'])[-1]
+                data[label] = author
 
     return data
 
 
 def update_db(data, db):
-    # YOUR CODE HERE
-    pass
+    '''
+        The following should be done in the function update_db:
+        - query the database by using the field 'label'
+        - update the data, by adding a new item under 'classification' with a key 'binomialAuthority'
+    '''
+    for key in data.keys():
+        query = {'label':key}
+        db.arachnid.update(query,
+                           {'$set':{
+                                'classification.binomialAuthority': data[key]
+                           }})
 
 
 def test():
@@ -70,7 +99,7 @@ def test():
     # Changes done to this function will not be taken into account
     # when doing a Test Run or Submit, they are just for your own reference
     # and as an example for running this code locally!
-    
+
     data = add_field(DATAFILE, FIELDS)
     from pymongo import MongoClient
     client = MongoClient("mongodb://localhost:27017")
