@@ -37,9 +37,9 @@ The resulting data should look like this:
                     }
 }
 """
-import codecs
+# import codecs
 import csv
-import json
+# import json
 import pprint
 
 DATAFILE = 'arachnid.csv'
@@ -64,12 +64,12 @@ def add_field(filename, fields):
     - if 'binomialAuthority_label' is "NULL", skip the item
     '''
 
-    process_fields = fields.keys()
     data = {}
     with open(filename, "r") as f:
         reader = csv.DictReader(f)
-        for i in range(3):
-            l = next(reader)
+
+        for _ in range(3):
+            next(reader)
 
         for row in reader:
             if (row['binomialAuthority_label'] != 'NULL') & (row['rdf-schema#label'] != 'NULL'):
@@ -89,9 +89,9 @@ def update_db(data, db):
     for key in data.keys():
         query = {'label':key}
         db.arachnid.update(query,
-                           {'$set':{
-                                'classification.binomialAuthority': data[key]
-                           }})
+                           {'$set':
+                                {'classification.binomialAuthority': data[key]
+                            }})
 
 
 def test():
