@@ -52,6 +52,8 @@ numbers
 # 2. Replace YOUR_NAME with your actual name in the vector
 # 'udacious' and run the code. Be sure to use quotes around it.
 
+YOUR_NAME <- "Ian Edington"
+
 udacious <- c("Chris Saden", "Lauren Castellano",
               "Sarah Spikes","Dean Eckles",
               "Andy Brown", "Moira Burke",
@@ -256,6 +258,5 @@ mtcars$mpg
 # https://www.udacity.com/course/viewer#!/c-ud651/l-729069797/e-804129314/m-830829287
 
 mean(mtcars$mpg)
-
 
 
