@@ -9,10 +9,13 @@ Notes:
 ***
 
 ### Pseudo-Facebook User Data
-Notes:
+Notes: Reading in the data
 
 ```{r Pseudo-Facebook User Data}
-
+getwd()
+setwd('~/Dropbox/dev/udacity/EDA/lesson3/')
+list.files()
+pf = read.csv('pseudo_facebook.tsv', sep = '\t')
 ```
 
 ***
@@ -21,8 +24,12 @@ Notes:
 Notes:
 
 ```{r Histogram of Users\' Birthdays}
-install.packages('ggplot2')
+# install.packages('ggplot2')
 library(ggplot2)
+
+names(pf)
+qplot(x = dob_day, data = pf) +
+  scale_x_discrete(breaks=1:31)
 ```
 
 ***
@@ -61,7 +68,10 @@ Notes:
 Notes:
 
 ```{r Faceting}
-
+names(pf)
+qplot(x = dob_day, data = pf) +
+  scale_x_discrete(breaks=1:31) +
+  facet_wrap(~dob_month, ncol = 3)
 ```
 
 #### Let’s take another look at our plot. What stands out to you here?
@@ -87,6 +97,11 @@ Notes:
 #### What code would you enter to create a histogram of friend counts?
 
 ```{r Friend Count}
+qplot(x = friend_count, data = pf)
+
+qplot(x = friend_count, data = subset(pf, !is.na(gender)), binwidth = 25) +
+  scale_x_continuous(limits = c(0,1000), breaks = seq(0,1000,50)) +
+  facet_wrap(~gender, ncol = 2)
 
 ```
 
@@ -134,6 +149,9 @@ Notes:
 Notes:
 
 ```{r Statistics \'by\' Gender}
+table(pf$gender)
+by(pf$friend_count, pf$gender, summary)
+
 
 ```
 
@@ -153,6 +171,9 @@ Notes:
 
 ```{r Tenure}
 
+qplot(tenure, data=pf, binwidth=30,
+      color = I('black'), fill = I('#099DD9'))
+
 ```
 
 ***
@@ -160,7 +181,12 @@ Notes:
 #### How would you create a histogram of tenure by year?
 
 ```{r Tenure Histogram by Year}
+pf$yrtenure <- pf$tenure/365.25
 
+
+qplot(yrtenure, data=pf, binwidth=0.25,
+      color = I('black'), fill = I('#099DD9')) +
+  scale_x_continuous(breaks = seq(1,7,1), limits = c(0,7))
 ```
 
 ***
@@ -169,7 +195,11 @@ Notes:
 Notes:
 
 ```{r Labeling Plots}
-
+qplot(yrtenure, data=pf, binwidth=0.25,
+      xlab = 'Number of years using Facebook',
+      ylab = 'Number of users in smaple',
+      color = I('black'), fill = I('#099DD9')) +
+  scale_x_continuous(breaks = seq(1,7,1), limits = c(0,7))
 ```
 
 ***
@@ -178,6 +208,10 @@ Notes:
 Notes:
 
 ```{r User Ages}
+
+qplot(age, data=pf, binwidth = 1) +
+  scale_x_continuous(breaks = seq(0,120,10), limits = c(0,120))
+
 
 ```
 
@@ -206,6 +240,29 @@ Notes:
 
 ```{r Add a Scaling Layer}
 
+summary(pf$friend_count)
+summary(log10(pf$friend_count))
+summary(log10(pf$friend_count+1))
+summary(sqrt(pf$friend_count))
+
+install.packages('gridExtra')
+library(gridExtra)
+
+p1 <- qplot(x = friend_count, data = pf)
+p2 <- qplot(x = log10(pf$friend_count+1), data = pf)
+p3 <- qplot(x = log(pf$friend_count+1), data = pf)
+p4 <- qplot(x = sqrt(pf$friend_count), data = pf)
+
+grid.arrange(p1, p2, p3, p4, ncol = 1)
+
+# or using ggplot
+p1 <- ggplot(aes(x = friend_count), data = pf) + geom_histogram()
+p2 <- p1 + scale_x_log10()
+p3 <- p1 + scale_x_sqrt()
+
+grid.arrange(p1, p2, p3, ncol = 1)
+
+
 ```
 
 ***
@@ -214,6 +271,16 @@ Notes:
 ### Frequency Polygons
 
 ```{r Frequency Polygons}
+
+qplot(x = friend_count,
+      y = ..count../sum(..count..),
+      data = subset(pf, !is.na(gender)), 
+      binwidth = 10, 
+      geom = 'freqpoly',
+      colour = gender) +
+  scale_x_continuous(limits = c(0, 1000),
+                     breaks = seq(0, 1000, 50))
+
 
 ```
 
@@ -224,6 +291,8 @@ Notes:
 
 ```{r Likes on the Web}
 
+by(pf$www_likes, pf$gender, sum)
+
 ```
 
 
@@ -233,13 +302,25 @@ Notes:
 Notes:
 
 ```{r Box Plots}
+qplot(x = gender, y = friend_count,
+      data = subset(pf, !is.na(gender)), geom = 'boxplot')
+
 
 ```
 
 #### Adjust the code to focus on users who have friend counts between 0 and 1000.
 
 ```{r}
+qplot(x = gender, y = friend_count,
+      data = subset(pf, !is.na(gender)), geom = 'boxplot')+
+  #this doesn't take out values (unlike scale_y_contiunous)
+  coord_cartesian(ylim = c(0, 1000))
 
+
+by(pf$friend_count, pf$gender, summary)
+
+
+?summary
 ```
 
 ***
