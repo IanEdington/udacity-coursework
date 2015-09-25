@@ -1,0 +1,26 @@
+reflections:
+How hard was the project?
+	3/5
+How do you feel about your code?
+	Good! I knew what I wanted it to do and I figured it out. If you wanted 100 cats, it would take a while to find all the pictures but that would be the hardest part!
+How many times have you clicked the cats? probably 200 times in total. Got to make sure they were working properly :D
+
+
+Project Requirements for Cat Clicker Premium
+
+Visuals
+
+The application should display
+
+a list of at least 5 cats, listed by name
+an area to display the selected cat
+In the cat display area, the following should be displayed
+
+the cat's name
+a picture of the cat
+text showing the number of clicks
+The specifics of the layout do not matter, so style it however you'd like.
+Interaction
+
+When a cat name is clicked in the list, the cat display area should update to show the data for the selected cat.
+The number of clicks in the cat area should be unique to each cat, and should increment when the cat's picture is clicked.
