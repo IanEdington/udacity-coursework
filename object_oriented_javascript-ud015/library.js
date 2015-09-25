@@ -5,9 +5,10 @@ Car.prototype.move = function(){
   this.loc+=1;
 };
 
-//there are always two parts to a class
-//both need to be inherited for the
-//sub-classing to work
+// SUB-Classing
+  // there are always two parts to a class
+  // both need to be inherited for the
+  // SUB-classing to work
 var Van = function(loc){
   //1.create the unique elements
   //inherited from the Car constuctor
@@ -20,6 +21,7 @@ Van.prototype.constructor = Van;
 
 Van.prototype.grab = function{ /*...*/ };
 
+// another example
 var Cop = function(loc, radio){
   Car.call(this, loc);
   this.radio = radio;
