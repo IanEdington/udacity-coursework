@@ -1,0 +1,26 @@
+---
+title: "lesson3_problemset"
+output: html_document
+---
+
+1.
+  How many observations are in the data set? : 53940
+  How many variables are in the data set? : 10
+  How many ordered factors are in the dataset? : 3 (cut, colour, clarity)
+  What letter represents the best colour for a diamond? : D
+
+```{r}
+library(ggplot2)
+data(diamonds)
+nrow(diamonds) # Number of observations
+summary(diamonds) # Variables in dataset
+?diamonds # Ordered Factors, Best Colour
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
