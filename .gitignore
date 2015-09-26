@@ -2,7 +2,7 @@
 .Rhistory
 
 # Python byte files and Virtual environment
-.env
+.env/
 *.pyc
 __pycache__
 
