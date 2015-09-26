@@ -13,7 +13,7 @@ Notes: Reading in the data
 
 ```{r Pseudo-Facebook User Data}
 getwd()
-setwd('~/Dropbox/dev/udacity/EDA/lesson3/')
+setwd('~/Dropbox/dev/udacity_coursework/data_analysis_with_r-ud651/lesson3')
 list.files()
 pf = read.csv('pseudo_facebook.tsv', sep = '\t')
 ```
@@ -315,12 +315,6 @@ qplot(x = gender, y = friend_count,
       data = subset(pf, !is.na(gender)), geom = 'boxplot')+
   #this doesn't take out values (unlike scale_y_contiunous)
   coord_cartesian(ylim = c(0, 1000))
-
-
-by(pf$friend_count, pf$gender, summary)
-
-
-?summary
 ```
 
 ***
@@ -333,11 +327,11 @@ Notes:
 ```
 
 #### On average, who initiated more friendships in our sample: men or women?
-Response:
+Response: used the by command to subset friend_count by gender, then use the summary function on the two subsets.
 #### Write about some ways that you can verify your answer.
 Response:
 ```{r Friend Requests by Gender}
-
+by(pf$friend_count, pf$gender, summary)
 ```
 
 Response:
@@ -348,7 +342,15 @@ Response:
 Notes:
 
 ```{r Getting Logical}
+summary(pf$mobile_likes)
+summary(pf$mobile_likes > 0)
 
+pf$mobile_check_in <- NA
+pf$mobile_check_in <- ifelse(pf$mobile_likes > 0, 1, 0)
+pf$mobile_check_in <- factor(pf$mobile_check_in)
+summary(pf$mobile_check_in)
+
+sum(pf$mobile_check_in == 1)/length(pf$mobile_check_in)
 ```
 
 Response:
