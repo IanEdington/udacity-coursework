@@ -3,7 +3,7 @@ title: "lesson3_problemset"
 output: html_document
 ---
 
-1.
+1. Diamonds
   How many observations are in the data set? : 53940
   How many variables are in the data set? : 10
   How many ordered factors are in the dataset? : 3 (cut, colour, clarity)
@@ -17,10 +17,11 @@ summary(diamonds) # Variables in dataset
 ?diamonds # Ordered Factors, Best Colour
 ```
 
-You can also embed plots, for example:
+2. Create a histogram of the price of all the diamonds in the diamond data set.
 
 ```{r, echo=FALSE}
-plot(cars)
+qplot(price, data = diamonds)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
