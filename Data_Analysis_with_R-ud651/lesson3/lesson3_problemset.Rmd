@@ -63,4 +63,16 @@ qplot(price, data = diamonds) + facet_wrap(~cut)
   # had to change qplot to include data, else it doesn't have info on cut
 ```
 
+7. Price by Cut
+
+Which cut has the 1. Highest priced diamond
+                  2. Lowest priced diamond
+                  3. Lowest median price
+
+```{r}
+by(diamonds$price, diamonds$cut, max)
+by(diamonds$price, diamonds$cut, min)
+by(diamonds$price, diamonds$cut, median)
+```
+
 
