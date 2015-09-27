@@ -42,3 +42,17 @@ nrow(subset(diamonds, price < 250)) # less than 250
 nrow(subset(diamonds, price >= 15000)) # more than or equal to 15,000
 ```
 
+5. Cheaper Diamonds
+Explore the largest peak in the price histogram you created earlier. Try limiting the x-axis, altering the bin width, and setting different breaks on the x-axis.
+
+```{r}
+hist <- qplot(diamonds$price) +
+  coord_cartesian(xlim = c(0, 5000)) # This doesn't change graph only view
+
+hist + scale_x_continuous(limits = c(500, 1500)) # Actually subsets the data
+hist + xlim(500, 1500) # Short hand for the same thing
+
+qplot(diamonds$price, binwidth = 50) +
+  scale_x_continuous(limits = c(500, 1500), breaks=seq(500,1500,100))
+```
+
