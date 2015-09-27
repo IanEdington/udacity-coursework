@@ -106,7 +106,7 @@ by(diamonds$price, diamonds$cut, summary)
 by(diamonds$price, diamonds$clarity, summary)
 by(diamonds$price, diamonds$color, summary)
 
-# I also experimented with a function however x=vir needs to become x=cut and vir2 needs to become diamonds$cut. Unsure of how to do this.
+# I also experimented with a function however x=vir needs to become x=cut and diamonds$vir needs to become diamonds$cut. Unsure of how to do this.
 boxNsummary <- function(diamonds, vir){
   reob <- ggplot(diamonds, aes(x=vir, y=price)) + geom_boxplot()
   by(diamonds$price, diamonds$vir, summary)
@@ -114,5 +114,20 @@ boxNsummary <- function(diamonds, vir){
   }
 
 boxNsummary(diamonds, cut)
+```
+
+11. Interquartile Range - IQR and first and third quartiles
+
+```{r}
+by(diamonds$price, diamonds$color, summary)
+by(diamonds$price, diamonds$color, IQR)
+```
+
+12. Price per Carat Box Plots by Color
+
+Investigate the price per carat of diamonds across the different colors of diamonds using boxplots.
+
+```{r}
+ggplot(diamonds, aes(x=color, y=pricePerCarat)) + geom_boxplot()
 ```
 
