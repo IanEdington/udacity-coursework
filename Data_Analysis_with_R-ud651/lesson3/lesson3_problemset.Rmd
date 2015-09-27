@@ -81,3 +81,18 @@ by(diamonds$price, diamonds$cut, median)
 qplot(x = price, data = diamonds) + facet_wrap(~cut, scales = "free_y")
 ```
 
+9. Price per Carat by Cut
+
+Create a histogram of price per carat and facet it by cut. You can make adjustments to the code from the previous exercise to get started.
+
+Adjust the bin width and transform the scale of the x-axis using log10.
+
+```{r}
+diamonds$pricePerCarat <- diamonds$price / diamonds$carat
+
+qplot(x = pricePerCarat, data = diamonds) +
+  facet_wrap(~cut, scales = "free_y") +
+  scale_x_log10()
+```
+
+
