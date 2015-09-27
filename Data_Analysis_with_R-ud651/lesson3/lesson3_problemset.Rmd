@@ -75,4 +75,9 @@ by(diamonds$price, diamonds$cut, min)
 by(diamonds$price, diamonds$cut, median)
 ```
 
+8. When you facet_wrap over cut the y scale is fixed. How do you make the y scale different for different facets?
+
+```{r}
+qplot(x = price, data = diamonds) + facet_wrap(~cut, scales = "free_y")
+```
 
