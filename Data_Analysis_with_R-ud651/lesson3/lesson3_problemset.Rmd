@@ -56,3 +56,11 @@ qplot(diamonds$price, binwidth = 50) +
   scale_x_continuous(limits = c(500, 1500), breaks=seq(500,1500,100))
 ```
 
+6. Break out histograms by cut (Price by Cut Histograms)
+
+```{r}
+qplot(price, data = diamonds) + facet_wrap(~cut)
+  # had to change qplot to include data, else it doesn't have info on cut
+```
+
+
