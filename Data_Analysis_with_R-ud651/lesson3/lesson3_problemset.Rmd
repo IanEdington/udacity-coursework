@@ -2,6 +2,10 @@
 title: "lesson3_problemset"
 output: html_document
 ---
+```{r}
+library(ggplot2)
+data(diamonds)
+```
 
 1. Diamonds
   How many observations are in the data set? : 53940
@@ -10,8 +14,6 @@ output: html_document
   What letter represents the best colour for a diamond? : D
 
 ```{r}
-library(ggplot2)
-data(diamonds)
 nrow(diamonds) # Number of observations
 summary(diamonds) # Variables in dataset
 ?diamonds # Ordered Factors, Best Colour
@@ -131,3 +133,10 @@ Investigate the price per carat of diamonds across the different colors of diamo
 ggplot(diamonds, aes(x=color, y=pricePerCarat)) + geom_boxplot()
 ```
 
+13. Carat Frequency Polygon
+
+```{r}
+qplot(carat, data = diamonds, geom = "freqpoly", binwidth = 0.01) +
+  coord_cartesian(xlim = c(0, 2)) +
+  scale_x_continuous(breaks=seq(0,2,0.1))
+```
