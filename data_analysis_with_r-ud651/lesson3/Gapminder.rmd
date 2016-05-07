@@ -1,0 +1,48 @@
+---
+title: "Gapminder Data"
+author: '@IanEdington'
+date: "December 21, 2015"
+output: html_document
+---
+
+The Gapminder website contains over 500 data sets with information about
+the world's population. Your task is to download a data set of your choice
+and create 2-5 plots that make use of the techniques from Lesson 3.
+
+You might use a simple histogram, a boxplot split over a categorical variable,
+or a frequency polygon. The choice is yours!
+
+You can find a link to the Gapminder website in the Instructor Notes.
+
+Once you've completed your investigation, create a post in the discussions that includes:
+      1. any questions you answered, your observations, and summary statistics
+      2. snippets of code that created the plots
+      3. links to the images of your plots
+
+You can save images by using the ggsave() command.
+ggsave() will save the last plot created.
+For example...
+                 qplot(x = price, data = diamonds)
+                 ggsave('priceHistogram.png')
+
+ggsave currently recognises the extensions eps/ps, tex (pictex),
+pdf, jpeg, tiff, png, bmp, svg and wmf (windows only).
+
+Copy and paste all of the code that you used for
+your investigation, and submit it when you are ready.
+====================================================================================
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+summary(cars)
+
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
